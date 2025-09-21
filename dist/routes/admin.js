@@ -24,7 +24,7 @@ router.get('/users', (req, res) => {
         adminId: req.user?.id,
         userCount: users.length,
     });
-    (0, response_1.sendSuccess)(res, 'Users retrieved', users, 200, requestId);
+    return (0, response_1.sendSuccess)(res, 'Users retrieved', users, 200, requestId);
 });
 router.get('/users/:id', (0, validation_1.validate)(validation_1.schemas.idParam), (req, res) => {
     const requestId = req.headers['x-request-id'];
@@ -33,7 +33,7 @@ router.get('/users/:id', (0, validation_1.validate)(validation_1.schemas.idParam
     if (!user) {
         return (0, response_1.sendError)(res, 'User not found', 'USER_NOT_FOUND', 404, requestId);
     }
-    (0, response_1.sendSuccess)(res, 'User retrieved', user, 200, requestId);
+    return (0, response_1.sendSuccess)(res, 'User retrieved', user, 200, requestId);
 });
 router.put('/users/:id/permissions', (0, validation_1.validate)({
     params: validation_1.schemas.idParam.params,
@@ -54,7 +54,7 @@ router.put('/users/:id/permissions', (0, validation_1.validate)({
         targetUserId: id,
         permissions,
     });
-    (0, response_1.sendSuccess)(res, 'User permissions updated', null, 200, requestId);
+    return (0, response_1.sendSuccess)(res, 'User permissions updated', null, 200, requestId);
 });
 router.delete('/users/:id', (0, validation_1.validate)(validation_1.schemas.idParam), (req, res) => {
     const requestId = req.headers['x-request-id'];
@@ -71,12 +71,12 @@ router.delete('/users/:id', (0, validation_1.validate)(validation_1.schemas.idPa
         adminId: req.user?.id,
         deletedUserId: id,
     });
-    (0, response_1.sendSuccess)(res, 'User deleted', null, 200, requestId);
+    return (0, response_1.sendSuccess)(res, 'User deleted', null, 200, requestId);
 });
 router.get('/services', (req, res) => {
     const requestId = req.headers['x-request-id'];
     const services = proxyService_1.proxyService.getServices();
-    (0, response_1.sendSuccess)(res, 'Services retrieved', services, 200, requestId);
+    return (0, response_1.sendSuccess)(res, 'Services retrieved', services, 200, requestId);
 });
 router.post('/services', (0, validation_1.validate)({
     body: joi_1.default.object({
@@ -100,7 +100,7 @@ router.post('/services', (0, validation_1.validate)({
         serviceName: name,
         serviceConfig: config,
     });
-    (0, response_1.sendSuccess)(res, 'Service added', config, 201, requestId);
+    return (0, response_1.sendSuccess)(res, 'Service added', config, 201, requestId);
 });
 router.delete('/services/:name', (req, res) => {
     const requestId = req.headers['x-request-id'];
@@ -114,7 +114,7 @@ router.delete('/services/:name', (req, res) => {
         adminId: req.user?.id,
         serviceName: name,
     });
-    (0, response_1.sendSuccess)(res, 'Service removed', null, 200, requestId);
+    return (0, response_1.sendSuccess)(res, 'Service removed', null, 200, requestId);
 });
 router.get('/stats', (req, res) => {
     const requestId = req.headers['x-request-id'];
@@ -137,7 +137,7 @@ router.get('/stats', (req, res) => {
             environment: process.env.NODE_ENV,
         },
     };
-    (0, response_1.sendSuccess)(res, 'System statistics retrieved', stats, 200, requestId);
+    return (0, response_1.sendSuccess)(res, 'System statistics retrieved', stats, 200, requestId);
 });
 exports.default = router;
 //# sourceMappingURL=admin.js.map
