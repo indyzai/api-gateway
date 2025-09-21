@@ -41,7 +41,7 @@ class Logger {
   /**
    * Create log context from request
    */
-  createContext(req: Request, requestId?: string): LogContext {
+  createContext(req: Request, requestId?: string): Partial<LogContext> {
     return {
       requestId: requestId || req.headers['x-request-id'] as string || 'unknown',
       userId: (req as any).user?.id,

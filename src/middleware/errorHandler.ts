@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { createErrorResponse } from '../utils/response';
 import { logger } from '../utils/logger';
 import config from '../config';
+import { AuthenticatedRequest } from '../types';
 
 /**
  * Global error handler middleware

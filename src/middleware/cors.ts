@@ -1,5 +1,5 @@
 import cors from 'cors';
-import { Request } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import config from '../config';
 import { logger } from '../utils/logger';
 

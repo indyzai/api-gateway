@@ -86,7 +86,7 @@ export const requestLogger = (
  * IP whitelist middleware
  */
 export const ipWhitelist = (allowedIPs: string[]) => {
-  return (req: Request, res: Response, next: NextFunction): any => {
+  return (req: Request, res: Response, next: NextFunction): void => {
     const clientIP = req.ip || req.connection.remoteAddress || '';
 
     if (allowedIPs.length > 0 && !allowedIPs.includes(clientIP)) {
@@ -97,12 +97,13 @@ export const ipWhitelist = (allowedIPs: string[]) => {
         url: req.originalUrl,
       });
 
-      return res.status(403).json({
+      res.status(403).json({
         success: false,
         message: 'Access denied',
         error: 'IP_NOT_WHITELISTED',
         timestamp: new Date().toISOString(),
       });
+      return;
     }
 
     next();
@@ -113,7 +114,7 @@ export const ipWhitelist = (allowedIPs: string[]) => {
  * Request size limiter
  */
 export const requestSizeLimit = (maxSize: string = '10mb') => {
-  return (req: Request, res: Response, next: NextFunction): any => {
+  return (req: Request, res: Response, next: NextFunction): void => {
     const contentLength = parseInt(req.headers['content-length'] || '0');
     const maxBytes = parseSize(maxSize);
 
@@ -127,12 +128,13 @@ export const requestSizeLimit = (maxSize: string = '10mb') => {
         ip: req.ip,
       });
 
-      return res.status(413).json({
+      res.status(413).json({
         success: false,
         message: 'Request entity too large',
         error: 'REQUEST_TOO_LARGE',
         timestamp: new Date().toISOString(),
       });
+      return;
     }
 
     next();
