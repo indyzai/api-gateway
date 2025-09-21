@@ -30,7 +30,7 @@ router.get('/users', (req: AuthenticatedRequest, res) => {
     userCount: users.length,
   });
   
-  sendSuccess(res, 'Users retrieved', users, 200, requestId);
+  return sendSuccess(res, 'Users retrieved', users, 200, requestId);
 });
 
 /**
@@ -48,7 +48,7 @@ router.get('/users/:id',
       return sendError(res, 'User not found', 'USER_NOT_FOUND', 404, requestId);
     }
     
-    sendSuccess(res, 'User retrieved', user, 200, requestId);
+    return sendSuccess(res, 'User retrieved', user, 200, requestId);
   }
 );
 
@@ -81,7 +81,7 @@ router.put('/users/:id/permissions',
       permissions,
     });
     
-    sendSuccess(res, 'User permissions updated', null, 200, requestId);
+    return sendSuccess(res, 'User permissions updated', null, 200, requestId);
   }
 );
 
@@ -112,7 +112,7 @@ router.delete('/users/:id',
       deletedUserId: id,
     });
     
-    sendSuccess(res, 'User deleted', null, 200, requestId);
+    return sendSuccess(res, 'User deleted', null, 200, requestId);
   }
 );
 
@@ -124,7 +124,7 @@ router.get('/services', (req: AuthenticatedRequest, res) => {
   const requestId = req.headers['x-request-id'] as string;
   const services = proxyService.getServices();
   
-  sendSuccess(res, 'Services retrieved', services, 200, requestId);
+  return sendSuccess(res, 'Services retrieved', services, 200, requestId);
 });
 
 /**
@@ -159,7 +159,7 @@ router.post('/services',
       serviceConfig: config,
     });
     
-    sendSuccess(res, 'Service added', config, 201, requestId);
+    return sendSuccess(res, 'Service added', config, 201, requestId);
   }
 );
 
@@ -183,7 +183,7 @@ router.delete('/services/:name', (req: AuthenticatedRequest, res) => {
     serviceName: name,
   });
   
-  sendSuccess(res, 'Service removed', null, 200, requestId);
+  return sendSuccess(res, 'Service removed', null, 200, requestId);
 });
 
 /**
@@ -213,7 +213,7 @@ router.get('/stats', (req: AuthenticatedRequest, res) => {
     },
   };
   
-  sendSuccess(res, 'System statistics retrieved', stats, 200, requestId);
+  return sendSuccess(res, 'System statistics retrieved', stats, 200, requestId);
 });
 
 export default router;
