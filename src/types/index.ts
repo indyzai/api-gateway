@@ -68,21 +68,14 @@ export interface ValidationSchema {
   params?: any;
 }
 
-interface AnyProperties {}
-
 export interface LogContext {
-  port?: number;
-  requestId: string;
-  environment?: string;
-  version?: string;
+  requestId?: string;
   userId?: string;
-  origin?: string;
-  statusCode?: number;
-  method: string;
-  url: string;
+  method?: string;
+  url?: string;
   userAgent?: string;
   error?: string;
-  ip: string;
+  ip?: string;
   [prop: string]: any;
 }
 
